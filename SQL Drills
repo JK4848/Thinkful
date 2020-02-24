@@ -91,14 +91,41 @@ WHERE make IN('Ford', 'Chevrolet')
 Answer: 612
 
 Write a query that returns the records for 10 vehicles with the highest highway fuel mileage.
+SELECT *
+FROM public.vehicles
+ORDER BY hwy DESC
+LIMIT 10;
+
+
 
 Write a query that returns all the records of vehicles since the year 2000 whose model name starts with a capital X. 
 Sort the list A through Z by make. What happens when you use a lowercase “x” instead?
 
+SELECT *
+FROM public.vehicles
+WHERE model LIKE 'X%'
+AND year >=2000
+ORDER BY make;
+
+lower X is different data returned (e.g., x4)
+
 Write a query that returns the count of records where the “cyl” field is NULL. Provide the query as well as the answer.
+SELECT COUNT (*)
+FROM public.vehicles
+WHERE cyl IS NULL;
+Answer: 58
 
 Write a query that returns the count of all records before the year 2000 that got more than 20 mpg hwy 
 and had greater than 3 liters displacement (“displ” field). Provide the query as well as the answer.
+SELECT COUNT (*)
+FROM public.vehicles
+WHERE
+	year < 2000
+	AND hwy > 20
+	AND displ > 3;
 
 Write a query that returns all records whose model name has a (capital) X in its 3rd position. 
 Hint: make sure your wildcard operator accommodates for any characters after the “X”!
+SELECT *
+FROM public.vehicles
+WHERE model LIKE '__X%';
